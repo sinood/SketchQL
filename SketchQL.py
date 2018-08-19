@@ -118,18 +118,18 @@ class SketchQL(object):
 
     # Imports a demo company database and populates it with sample data
     def add_demo_data(self):
-        self.execute_from_script('/Users/sinoouladdaoud/dist/sample_database.sql')
-        self.execute_from_script('/Users/sinoouladdaoud/dist/sample_organizationdata.sql')
+        self.execute_from_script('SketchQL/dist/sample_database.sql')
+        self.execute_from_script('SketchQL/dist/sample_organizationdata.sql')
         self.conn1.commit()
 
     # Displays text from 'help.txt' to the text box to assist the user
     def get_help(self):
-        help_file = open('/Users/sinoouladdaoud/dist/help.txt','r')
+        help_file = open('SketchQL/dist/help.txt','r')
         help_text = help_file.read()
         self.text_area.insert(tk.END, '\n' + help_text + '\n')
 
     def get_about(self):
-        help_file = open('/Users/sinoouladdaoud/dist/README.txt','r')
+        help_file = open('SketchQL/dist/README.txt','r')
         help_text = help_file.read()
         self.text_area.insert(tk.END, '\n' + help_text + '\n')
 

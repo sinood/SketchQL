@@ -1,0 +1,65 @@
+====================================================================================================
+
+HELP
+
+====================================================================================================
+
+                                     ======== Buttons ========                                    
+
+======= CLEAR =======
+
+The "Clear" button removes all text from the text window.
+
+In order to execute text currently in the text box, all text must be one or more executable SQL statements. The "Clear" button should be used to clear the text box of all text before executing SQL statements, otherwise SketchQL will try to run all text currently in the text box, input as well as output.
+
+====== EXECUTE ======
+
+The "Execute" button grabs text from the text box and runs it as SQL statements.
+
+Because it grabs ALL of the text in the text box, the "Clear" button should be clicked before attempting to execute more statements.
+
+==== SHOW TABLES ====
+
+The "Show Tables" button displays all of the SQL tables and views currently stored in the "database.sqlite3" file created automatically by SketchQL. 
+
+The button displays tables and views as separate tables. Use the "Clear" button to continue.
+
+== SHOW TABLE INFO == 
+
+The "Show Table Info" button takes the name of a table or view and displays that tables attributes by column.
+
+It is recommended to click the "Show Tables Button" to see a list of the existing tables and views, then to copy and paste the name of the desired table into a cleared text box (use the "Clear" button). The "Show Tables Button" will only take the name of a table or view, with no other text in the text box (i.e. clicking "Show Table Info" when "a_table" is the only text in the text box will show the attributes of table "a_table").
+
+======= DEMO ========
+
+The "Demo" button loads and populates tables from sample SQL script. 
+
+NOTE: These are demonstrative tables only. Clicking the "Demo" button again will drop all of the demo tables and repopulate them, deleting any changes made to them.
+
+======= QUIT ========
+
+The "Quit" button exits the application. 
+
+Changes made will be saved to the "database.sqlite3" file, and will remain the next time SketchQL is opened.
+
+====================================================================================================
+                               
+                               ======== Additional Features ========                                
+
+======= Dropping all tables:
+
+To drop all tables from the database, type "clear all tables" into the text box and hit "Execute."
+
+Ex: "clear all tables" ==> Execute
+
+======= Executing SQL statements from a .sql file:
+
+SketchQL can execute .sql files so long as they are error free and contain SQL statements supported by SQLite3. 
+
+To execute a .sql file, in the text box type "file" followed by a space and the complete path of the .sql file to be executed, then hit "Execute."
+
+Ex: "file /Users/yourusername/examplefolder/example.sql" ==> Execute
+
+For additional SQLite features, visit www.sqlite.org
+
+====================================================================================================
