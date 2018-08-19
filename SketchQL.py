@@ -3,6 +3,7 @@ import sqlite3 as s3
 import pandas as pd
 from pandas import DataFrame
 import os
+import sys
 import Tkinter as tk
 from Tkinter import Text, Frame, Button
 
@@ -14,6 +15,9 @@ class SketchQL(object):
         # Establishes a connection to a sqlite3 file
         conn1 = s3.connect('database.sqlite3')
         self.conn1 = conn1
+        # Gets the directory of the executable file
+        os.chdir(os.path.dirname(sys.executable))
+        self.dir = os.getcwd()
         # Converts tuple output rows to sqlite3 Row objects
         self.conn1.row_factory = s3.Row
         # Creates a cursor for the current connection
@@ -118,18 +122,28 @@ class SketchQL(object):
 
     # Imports a demo company database and populates it with sample data
     def add_demo_data(self):
-        self.execute_from_script('SketchQL/dist/sample_database.sql')
-        self.execute_from_script('SketchQL/dist/sample_organizationdata.sql')
+        path_rel_1 = 'sample_database.sql'
+        path_rel_2 = 'sample_organizationdata.sql'
+        path_abs_1 = os.path.join(self.dir, path_rel_1)
+        path_abs_2 = os.path.join(self.dir, path_rel_2)
+        self.execute_from_script(path_abs_1)
+        self.execute_from_script(path_abs_2)
         self.conn1.commit()
 
     # Displays text from 'help.txt' to the text box to assist the user
     def get_help(self):
-        help_file = open('SketchQL/dist/help.txt','r')
+        path_rel = 'help.txt'
+        path_abs = os.path.join(self.dir, path_rel)
+        print path_abs
+        help_file = open(path_abs,'r')
         help_text = help_file.read()
         self.text_area.insert(tk.END, '\n' + help_text + '\n')
 
     def get_about(self):
-        help_file = open('SketchQL/dist/README.txt','r')
+        path_rel = 'README.txt'
+        path_abs = os.path.join(self.dir, path_rel)
+        print path_abs
+        help_file = open(path_abs,'r')
         help_text = help_file.read()
         self.text_area.insert(tk.END, '\n' + help_text + '\n')
 
