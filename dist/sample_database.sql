@@ -1,41 +1,38 @@
-Begin;
+BEGIN;
 
-Drop table if exists Organization_demo;
-Drop table if exists Organizationinfo_demo;
-Drop table if exists SubOrganization_demo;
-Drop table if exists department_demo;
+DROP TABLE IF EXISTS Organization_demo;
+DROP TABLE IF EXISTS Organizationinfo_demo;
+DROP TABLE IF EXISTS SubOrganization_demo;
+DROP TABLE IF EXISTS department_demo;
 
-Create table Organization_demo(
-OrgID Numeric Not Null Primary Key,
-OrgName Text Not Null Unique
-);
-create unique index Orgname_unique_idx 
-on Organization_demo(OrgName);
-
-Create table Organizationinfo_demo(
-OrgID Numeric Not Null Primary Key 
-    References Organization_demo(OrgID),
-Founded Date Null,
-Goal Text Null
+CREATE TABLE Organization_demo(
+    OrgID NUMERIC NOT NULL PRIMARY KEY,
+  OrgName TEXT    NOT NULL UNIQUE
 );
 
-Create table SubOrganization_demo(
-SID Integer Not Null Primary Key,
-OrgID Numeric Not Null 
-    References Organizationinfo_demo(OrgID),
-Name TEXT Not Null Unique
+CREATE UNIQUE INDEX Orgname_UNIQUE_idx
+ON Organization_demo(OrgName);
+
+CREATE TABLE Organizationinfo_demo(
+    OrgID NUMERIC NOT NULL PRIMARY KEY REFERENCES Organization_demo(OrgID),
+  Founded DATE    NULL,
+     Goal TEXT    NULL
 );
-create unique index names_unique_idx 
-on SubOrganization_demo (Name);
 
-Create table department_demo(
-DEPTID Integer Not Null Primary Key,
-SubOrgID Integer Not Null 
-    References SubOrganization_demo(SID),
-Name text Not Null Unique
+CREATE TABLE SubOrganization_demo(
+     SID INTEGER NOT NULL PRIMARY KEY,
+   OrgID NUMERIC NOT NULL REFERENCES Organizationinfo_demo(OrgID),
+    Name TEXT    NOT NULL UNIQUE
 );
-create unique index namesdept_unique_idx 
-on department_demo(Name);
+CREATE UNIQUE INDEX names_UNIQUE_idx
+  ON SubOrganization_demo (Name);
 
-Commit;
+CREATE TABLE department_demo(
+    DEPTID INTEGER NOT NULL PRIMARY KEY,
+  SubOrgID INTEGER NOT NULL REFERENCES SubOrganization_demo(SID),
+      Name TEXT    NOT NULL UNIQUE
+);
+CREATE UNIQUE INDEX namesdept_UNIQUE_idx
+  ON department_demo(Name);
 
+COMMIT;
